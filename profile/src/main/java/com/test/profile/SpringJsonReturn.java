@@ -25,7 +25,7 @@ public class SpringJsonReturn {
 	@Value("${spring.id}")
 	private int id;
 	
-	/*public void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -36,7 +36,7 @@ public class SpringJsonReturn {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	*/
+	
 	@Value("${spring.role}")
 	private String role;
 	

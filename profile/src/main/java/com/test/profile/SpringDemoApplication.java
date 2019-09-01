@@ -5,11 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @SpringBootApplication
-@RestController
+@Controller
 public class SpringDemoApplication {
 	private static final Logger logger = LoggerFactory.getLogger(SpringDemoApplication.class);
 	@Value("${spring.application.name:SpringTesT}")
@@ -21,10 +23,17 @@ public class SpringDemoApplication {
 		SpringApplication.run(SpringDemoApplication.class, args);
 	}
 	
-	@RequestMapping(value="/helo")
+	@GetMapping(value="/helo")
+	@ResponseBody
 	public String HelloWorld() {
 		return name;
 		
 	}
 
-}
+	   @GetMapping("/hello-world")
+	   @ResponseBody
+	public SpringJsonReturn callJson(@RequestParam(name="name",required=false) String name) {
+	return new SpringJsonReturn();
+
+}}
+	   
