@@ -14,26 +14,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SpringDemoApplication {
 	private static final Logger logger = LoggerFactory.getLogger(SpringDemoApplication.class);
+	
 	@Value("${spring.application.name:SpringTesT}")
 	private String name;
 	
+	@Value("${spring.id}")
+	private int id ;
+	
+	@Value("${spring.role}")
+	private String role;
+
 	public static void main(String[] args) {
-		 logger.info("this is a info message");
-	     logger.warn("this is a warn message");
+		logger.info("this is a info message");
+		logger.warn("this is a warn message");
 		SpringApplication.run(SpringDemoApplication.class, args);
 	}
-	
-	@GetMapping(value="/helo")
+
+	@GetMapping(value = "/helo")
 	@ResponseBody
 	public String HelloWorld() {
 		return name;
-		
+
 	}
 
-	   @GetMapping("/hello-world")
-	   @ResponseBody
-	public SpringJsonReturn callJson(@RequestParam(name="name",required=false) String name) {
-	return new SpringJsonReturn();
+	@GetMapping("/hello-world")
+	@ResponseBody
+	public SpringJsonReturn callJson(@RequestParam(name = "name", required = false) String name) {
+		return new SpringJsonReturn();
 
-}}
-	   
+	}
+	
+	@GetMapping("/hello-world-parameter")
+	@ResponseBody
+	public SpringJosnParameter callJson() {
+		return new SpringJosnParameter(name, id, role);
+
+	}
+}
