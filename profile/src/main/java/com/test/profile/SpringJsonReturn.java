@@ -3,9 +3,10 @@ package com.test.profile;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
-@ComponentScan
+
+@Component
 public class SpringJsonReturn {
 	
 	@Value("${spring.application.name:SpringTesT}")
