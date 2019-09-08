@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -88,7 +90,15 @@ public class SpringDemoApplication {
 	
 	@GetMapping("/Read")
 	@ResponseBody
-	public String getItemDB() {
-		return queryDB.getItemFromTable(2019);
+	public ResponseEntity<?> getItemDB() {
+		ResponseEntity<?> entity =  readDatabase();
+		return entity;
+	}
+	
+	private ResponseEntity<?> readDatabase(){
+		ResponseEntity<?> response;
+		UserPrefList userPrefList = queryDB.getItemFromTable(2019);
+		response = new ResponseEntity<UserPrefList>(userPrefList, HttpStatus.OK);
+		return response;
 	}
 }
