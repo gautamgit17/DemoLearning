@@ -1,0 +1,23 @@
+  AWSCredentialsProvider provider = new InstanceProfileCredentialsProvider();
+
+    AWSCredentials credential = provider.getCredentials();
+
+    AmazonDynamoDBClient client = new AmazonDynamoDBClient(credential);
+
+    client.setRegion(Region.getRegion(Regions.US_WEST_2));
+
+    DynamoDB dynamoDB = new DynamoDB(client);
+
+    TableCollection<ListTablesResult> tables = dynamoDB.listTables();
+	
+	
+	
+	AWSCredentialsProviderChain credentialsProvider;
+try {
+    credentialsProvider = new DefaultAWSCredentialsProviderChain();
+}
+catch (Exception e) {
+    throw new RuntimeException("Error loading credentials", e);
+}
+
+AmazonDynamoDBClient client = new AmazonDynamoDBClient(credentialsProvider);

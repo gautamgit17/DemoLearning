@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.amazonaws.client.builder.AwsClientBuilder;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB; 
@@ -26,9 +27,16 @@ DataBaseHelper baseHelper;
 
 public void createDynamoTable() {
 	
-	 AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-	            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-west-1"))
-	            .build();
+			AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+					.withRegion(Regions.EU_WEST_1)
+					.build();
+	
+		/*
+		 * AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+		 * .withEndpointConfiguration(new
+		 * AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-west-1"))
+		 * .build();
+		 */
 
 	        DynamoDB dynamoDB = new DynamoDB(client);
 	        String tableName = "Movies";
